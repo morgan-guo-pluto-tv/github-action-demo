@@ -1,0 +1,33 @@
+name: Github Action Demos
+run-name: ${{ github.actor }} is running the current action🚀
+on: [push]
+env:
+  # Setting an environment variable with the value of a configuration variable
+  BASE_PATH: ${{ github.workspace }}
+jobs:
+  Env:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo $BASE_PATH
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: main
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+      - working-directory: ./main
+        run: npm test
+  Clone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tools repo
+        uses: actions/checkout@v3
+        with:
+          repository: Pluto-tv/service-adpod
+          path: service-adpod
+          token: ${{ secrets.PLUTO_GITHUB_TOKEN }} 
+      - run: ls
+        working-directory: ./service-adpod
