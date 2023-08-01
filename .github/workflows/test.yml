@@ -23,11 +23,19 @@ jobs:
   Clone:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout tools repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
           repository: Pluto-tv/service-adpod
           path: service-adpod
           token: ${{ secrets.PLUTO_GITHUB_TOKEN }} 
       - run: ls
         working-directory: ./service-adpod
+  Start:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+      - run: npm run start
+
