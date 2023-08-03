@@ -1,0 +1,11 @@
+name: Github Action Demos 2
+run-name: ${{ github.actor }} is running the current action🚀
+on:
+    schedule:
+      # * is a special character in YAML so you have to quote this string
+      - cron:  '30 17 * * *'
+jobs:
+  Demo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "scheduling run at `date`"
